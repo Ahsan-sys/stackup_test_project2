@@ -1,20 +1,20 @@
 class SubscriptionPolicy < ApplicationPolicy
 
 	def index?
-		user.type == 'Admin'
+		user.type == 'Buyer'
 	end
 
 	def create?
-		user.type == 'Admin'
+		user.type == 'Buyer'
 
 	end
 
 	def destroy?
-		user.type == 'Admin'
+		user.type == 'Buyer'
 	end
 
 	def new?
-		user.type == 'Admin'
+		user.type == 'Buyer'
 		
 		
 	end
