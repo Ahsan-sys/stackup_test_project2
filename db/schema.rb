@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_06_23_115933) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "features", force: :cascade do |t|
     t.string "name"
     t.integer "code"
@@ -19,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_06_23_115933) do
     t.integer "limit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "plan_id"
+    t.bigint "plan_id"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_features_on_deleted_at"
     t.index ["plan_id"], name: "index_features_on_plan_id"
@@ -35,8 +38,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_115933) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "plan_id"
+    t.bigint "user_id"
+    t.bigint "plan_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_115933) do
     t.date "trans_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "subscription_id"
-    t.integer "feature_id"
+    t.bigint "subscription_id"
+    t.bigint "feature_id"
     t.index ["feature_id"], name: "index_trasections_on_feature_id"
     t.index ["subscription_id"], name: "index_trasections_on_subscription_id"
   end
@@ -62,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_115933) do
     t.date "usage_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "subscription_id"
-    t.integer "feature_id"
+    t.bigint "subscription_id"
+    t.bigint "feature_id"
     t.index ["feature_id"], name: "index_usages_on_feature_id"
     t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end

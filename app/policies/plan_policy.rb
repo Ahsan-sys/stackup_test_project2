@@ -16,7 +16,6 @@ class PlanPolicy < ApplicationPolicy
 	def new?
 		user.type == 'Admin'
 		
-		
 	end
 
 end
