@@ -7,6 +7,6 @@ class User < ApplicationRecord
   after_create :user_send
 
   def user_send
-    UserMailer.user_send(self).deliver
+    UserMailer.user_send(self).deliver_later
   end
 end
