@@ -1,0 +1,80 @@
+
+<%if policy(@subscriptions).index?%>
+	<h1>Subscriptions Index Page</h1>
+	
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="table-dark">
+	    <tr>
+	      <th>Plan Name</th>
+	      <th>Plan Fee</th>
+	      <th>Show Transections</th>
+	      <th>Remove Subscription</th>
+	      <th>Pay Bill</th>
+
+
+	      <!-- <th colspan="3"></th> -->
+	    </tr>
+	  </thead>
+
+
+	  <tbody>
+	    
+		
+	<%@subscriptions.each do |s|%>
+		<%if s.user_id==current_user.id%>
+			<tr>
+				<td><%=Plan.find(s.plan_id).name%></td>
+				<td><%=Plan.find(s.plan_id).fee%></td>
+				<td><%=link_to "Transections", user_subscription_trasections_path(current_user.id,s.id)%></td>
+				<td><%=link_to "Remove Subscription", user_subscription_path(current_user.id,s), method: :delete, data: {confirm: "Are you sure?"}%></td>
+				<td><%=link_to "Pay Bill", new_user_subscription_trasection_path(current_user.id,s.id)%></td>
+				
+				<%end%>
+			</tr>
+		<%end%>
+
+			
+	  </tbody>
+	</table>
+<%else%>
+	
+
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="table-dark">
+	    <tr>
+	      <th>User Name</th>
+	      <th>Plan Name</th>
+	      <th>Plan Fee</th>
+	      <th>Create Usage</th>
+	      <th>Remove Subscription</th>
+	      
+
+
+	      <!-- <th colspan="3"></th> -->
+	    </tr>
+	  </thead>
+
+
+	  <tbody>
+	    
+		
+	<%@subscriptions.each do |s|%>
+		<%if params[:plan_id] != nil &&  Integer(params[:plan_id])==s.plan_id%>
+		<tr>
+			<td><%=User.find(s.user_id).name%></td>
+			<td><%=Plan.find(s.plan_id).name%></td>
+			<td><%=Plan.find(s.plan_id).fee%></td>
+			<td><%=link_to "Create", new_user_subscription_usage_path(params[:user_id],s.id)%></td>
+			<td><%=link_to "Remove Subscription", user_subscription_path(current_user.id,s), method: :delete, data: {confirm: "Are you sure?"}%></td>
+		</tr>
+		<%end%>
+						
+	<%end%>
+
+			
+	  </tbody>
+	</table>
+<%end%>
+
+
+	

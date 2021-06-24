@@ -1,0 +1,42 @@
+<h1>Usage New Page</h1>
+
+
+<%= form_for @usage, url: {action: "create"} do |usage| %>
+  <% if @usage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@usage.errors.count, "error") %> prohibited this usage from being saved:</h2>
+
+      <ul>
+        <% @usage.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="field form-group">
+    <%= usage.text_field :feature_id,
+      class: "form-control", placeholder: "Feature id"
+    %>
+    <br>
+  </div>
+  <%=link_to "All Features", user_plan_features_path(params[:user_id],Subscription.find(Integer(params[:subscription_id])).plan.id)%>
+  <br>
+  <%=usage.hidden_field :subscription_id, value: params[:subscription_id]%>
+  <br>
+  <div class="field form-group">
+    <%= usage.text_field :total_usage,
+      class: "form-control", placeholder: "Over Useage"
+     %>
+  </div>
+  <br>
+  <div class="field form-group">
+    <%= usage.date_field :usage_date,
+      class: "form-control", placeholder: "Useage date"
+     %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= usage.submit %>
+  </div>
+<% end %>

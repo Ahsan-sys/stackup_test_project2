@@ -1,0 +1,29 @@
+<%if user_signed_in?%>
+	<h1>User Show Page</h1>
+
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="table-dark">
+	    <tr>
+	      <th>Name</th>
+	      <th>Fee</th>
+	      <!-- <th colspan="3"></th> -->
+	    </tr>
+	  </thead>
+
+
+	  <tbody>
+	    
+			<%@user.plans.each do |p| %>
+			<tr>
+				<td><%=p.name%></td>
+				<td><%=p.fee%></td>
+				
+				
+			</tr>
+			<%end%>
+
+	  
+	  </tbody>
+	</table>
+<%end%>
+

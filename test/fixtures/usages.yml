@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_usage: 1
+  usage_date: 2021-06-18
+
+two:
+  total_usage: 1
+  usage_date: 2021-06-18

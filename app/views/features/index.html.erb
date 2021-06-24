@@ -1,0 +1,34 @@
+<h1>Features Index Page</h1>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Feature Name</th>
+      <th>Feature id</th>
+      <th>Plan Name</th>
+      <th>Show Feature</th>
+
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+
+  <tbody>
+    
+		
+	<%@features.each do |fea| %>
+	<%if Integer(fea.plan_id) == Integer(params[:plan_id])%>
+		<tr>
+			<td><%=fea.name%></td>
+			<td><%=fea.id%></td>
+			<td><%=Plan.find(fea.plan_id).name%></td>
+			<td><%=link_to "Show Feature", user_plan_feature_path(params[:user_id],fea.plan_id,fea.id)%></td>
+	</tr>
+	<%end%>
+	<%end%>
+		
+
+  
+  </tbody>
+</table>

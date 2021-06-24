@@ -1,0 +1,17 @@
+<h1>Features New Page</h1>
+<%=form_for @feature, url: {action: "create"} do |f|%>
+	<div class="field form-group">
+	    <%= f.text_field :name, class: "form-control", placeholder: "Feature Name"%>
+  	</div></br>
+  	<div class="field form-group">
+	    <%= f.text_field :code, class: "form-control", placeholder: "Feature Code"%>
+  	</div></br>
+  	<div class="field form-group">
+	    <%= f.text_field :price, class: "form-control", placeholder: "Feature Price Per Unit"%>
+  	</div></br>
+  	<div class="field form-group">
+	    <%= f.text_field :limit, class: "form-control", placeholder: "Feature Units Limit"%>
+  	</div></br>
+
+	<%=f.submit%>
+<%end%>

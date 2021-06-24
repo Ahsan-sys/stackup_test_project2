@@ -1,0 +1,125 @@
+<h1>Trasection New Page</h1>
+<%@counter=0%>
+<%@as=0%>
+<%@bs=0%>
+<%= form_for @trasection, url: {action: "create"} do |trasection| %>
+
+  <% if @trasection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trasection.errors.count, "error") %> prohibited this trasection from being saved:</h2>
+
+      <ul>
+        <% @trasection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  
+
+  			<!------------------OverUSe = 0----------------------->
+
+
+
+  <%if Integer(Subscription.find(Integer(params[:subscription_id])).usages.sum(:total_usage))==0%>
+
+										<!--------------------------------------->
+
+				<table class="table table-striped table-bordered table-hover">
+				  <thead class="table-dark">
+				    <tr>
+				    	<th>Subscription ID</th>
+				      <th>Feature ID</th>
+				      <th>Over Use</th>
+				      <th>Over Use Price</th>
+				      
+				      <th>Bill</th>
+				      <th>Date</th>
+
+				      <!-- <th colspan="3"></th> -->
+				    </tr>
+				  </thead>
+
+
+				  <tbody>
+				  	<tr>
+							<td><%=params[:subscription_id]%></td>
+							<td> <%="nil" %></td>
+							<td> <%="nil" %></td>
+							<td> <%="nil" %></td>
+							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee)%></td>
+							<td><%=Date.today%></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+  			<!------------------Over Use > 0----------------------->
+
+
+	<%else%>
+		<%@b=Subscription.find(Integer(params[:subscription_id])).usages.where("total_usage >0")%>
+
+		<%@b.each do |b|%>
+			  	<%@counter =  (Integer(Feature.find(b.feature_id).price)*b.total_usage)%>
+
+			  <!------------------Table of Over Use > 0----------------------->
+			  	<table class="table table-striped table-bordered table-hover">
+				  <thead class="table-dark">
+				    <tr>
+				    	<th>Subscription ID</th>
+				      <th>Feature ID</th>
+				      <th>Over Use</th>
+				      <th>Price Per Unit</th>
+
+				      <th>Over Use Price</th>
+				      
+				      <th>Plan Bill</th>
+				      <th>Total Bill</th>
+				      <th>Date</th>
+
+				      <!-- <th colspan="3"></th> -->
+				    </tr>
+				  </thead>
+
+
+				  <tbody>
+				  	<tr>
+							<td><%=b.subscription_id%></td>
+							<td> <%=b.feature_id %></td>
+							<td> <%=b.total_usage %></td>
+							<td><%=Feature.find(b.feature_id).price%></td>
+							<td> <%=@counter%></td>
+							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee+@counter)%></td>
+							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee+@counter)+ @counter%></td>
+							<td><%=Date.today%></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			  <!--------------------------------------->
+
+
+		<%end%>
+
+	<%end%>
+
+			<div class="field form-group">
+			  	<%= trasection.hidden_field :subscription_id, value: Integer(params[:subscription_id]), class: "form-control"%>
+			</div>
+ 					<!--------------------------------------->
+
+  <div class="actions">
+    <%= trasection.submit %>
+  </div>
+  <br>
+<% end %>
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<h1>Trasections Index Page</h1>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Buyer Name</th>
+      <th>Plan Name</th>
+      <th>Plan Fee</th>
+      <th>Feature Over Used</th>
+      <th>Feature Extra Charges</th>
+      <th>Total Bill</th>
+
+
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+
+  <tbody>
+    
+		
+	
+<%@trasections.each do |tr|%>
+	<%if tr.subscription_id!=nil%>
+		<%if Integer(params[:subscription_id])==Integer(tr.subscription_id) %>
+			<tr>
+				<td><%=Subscription.find(Integer(tr.subscription_id)).buyer.name%></td>
+			
+				<td><%=Subscription.find(Integer(tr.subscription_id)).plan.name%></td>
+				
+				<td><%=Subscription.find(Integer(tr.subscription_id)).plan.fee%></td>
+				
+				<%if tr.feature_id !=nil%>
+					<td><%=Feature.find(Integer(tr.feature_id)).name%></td>
+				<%else%>
+					<td><%='nil'%></td>	
+				<%end%>
+				<td> <%=tr.amount%></td>
+				<%if tr.feature_id !=nil%>
+					<td> <%= tr.amount + Subscription.find(Integer(tr.subscription_id)).plan.fee %></td>
+				<%else%>
+					<td><%=Subscription.find(Integer(tr.subscription_id)).plan.fee%></td>
+				<%end%>
+				
+			</tr>
+		<%end%>
+	<%end%>
+
+<%end%>
+		
+
+  
+  </tbody>
+</table>

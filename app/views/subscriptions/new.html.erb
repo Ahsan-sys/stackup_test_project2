@@ -1,0 +1,33 @@
+<h1>Subscription New Page</h1>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Fee</th>
+      <th>Subscribe</th>
+
+
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+
+  <tbody>
+    
+		
+	<%=form_for @subscription, url: {action: "create"} do |subs|%>
+		<td><%=Plan.find(params[:plan_id]).name%></td>
+		<td><%=Plan.find(params[:plan_id]).fee%></td>
+
+		<%=subs.hidden_field :user_id, value: params[:user_id]%>
+		<%=subs.hidden_field :plan_id, value: params[:plan_id]%>
+
+		<td><%=subs.submit%></td>
+		
+	<%end%>
+		
+  </tbody>
+</table>
+

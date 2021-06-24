@@ -1,0 +1,65 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+  	<%=link_to 'Test Project', root_path, class: "navbar-brand"%>
+    <!-- <a class="navbar-brand" href="#">Book Mania</a> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+<!-- Here we can add links to every page we want to go, ofcourse not models index,show etc page -->
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+        <%if !user_signed_in? %>
+
+          <li class="nav-item">
+            <%=link_to 'Sign in', new_user_session_path, class: 'nav-link'%>
+          </li>
+
+          <li class="nav-item">
+            <%=link_to 'Sign up', new_user_registration_path, class: 'nav-link'%>
+          </li>
+
+        <%else%>
+
+          <li class="nav-item">
+            <%=link_to 'All Plans', user_plans_path(current_user), class: 'nav-link'%>
+          </li>
+          <%if current_user.type=="Buyer"%>
+            <li class="nav-item">
+             <%=link_to 'Subscriptions', user_subscriptions_path(current_user.id), class: 'nav-link'%>
+            </li>
+          <%else%>
+            <li class="nav-item">
+              <%=link_to 'Create Plan', new_user_plan_path(current_user.id), class: 'nav-link'%>
+            </li>
+
+          <%end%>
+
+          <li class="nav-item">
+            <%=link_to 'Back', :back, class: 'nav-link'%>
+          </li>
+
+          
+
+         
+        <%end%>
+
+        
+
+        
+      </ul>
+      <%if user_signed_in? %>
+
+        <form class="d-flex">
+          <%=link_to 'Sign out', destroy_user_session_path, class: 'nav-link', method: :delete%>
+        </form>
+      <%end%>
+    </div>
+
+    <!-- Upto here is our nav bar -->
+  
+  </div>
+</nav>

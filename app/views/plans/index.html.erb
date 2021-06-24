@@ -1,0 +1,49 @@
+<h1>Plans index Page</h1>
+
+
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="table-dark">
+	    <tr>
+	      <th>Name</th>
+	      <th>Fee</th>
+	      <th>Show Features</th>
+	      <%if current_user.type == "Admin"%>
+	      	<th>Delete Plan</th>
+	      	<th>Show Plan Subscriptions</th>
+	      <%else%>
+	      	<th>Subscribe Plan</th>
+	      <%end%>
+
+	      <!-- <th colspan="3"></th> -->
+	    </tr>
+	  </thead>
+
+
+	  <tbody>
+	    
+			<%@plans.each do |plan|%>
+			<tr>
+				<td><%=plan.name%></td>
+				<td><%=plan.fee%></td>
+				<td><%=link_to "Show Features", user_plan_path(current_user.id,plan.id)%></td>
+
+				<%if policy(plan).index?%>
+					<td><%=link_to "Delete",user_plan_path(current_user.id, plan.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+					<td><%=link_to "Subscriptions", user_subscriptions_path(current_user.id, :plan_id=>plan.id)%></td>
+				<%else%>
+					
+					<td><%=link_to "Subscribe",new_user_subscription_path(:plan_id=>plan.id)%></td>
+					
+				<%end%>
+			</tr>
+			<%end%>
+			
+
+	  
+	  </tbody>
+	</table>
+
+
+
+
+	
