@@ -21,6 +21,19 @@ class FeaturesController < ApplicationController
 
   end
 
+  def edit
+    @feature=Feature.find(params[:id])
+  end
+
+  def update
+    @feature=Feature.find(params[:id])
+    if @feature.update(feature_params)
+      redirect_to user_plans_path(current_user.id)
+    else
+      render root_path
+    end
+  end
+
   def destroy
 
     @feature = Feature.find(params[:id])

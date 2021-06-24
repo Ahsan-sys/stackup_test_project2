@@ -12,6 +12,7 @@
       <th>Code</th>
       <th>Feature Limit</th>
       <th>Feature Price</th>
+      <th>Edit Feature</th>
 
       <!-- <th colspan="3"></th> -->
     </tr>
@@ -27,6 +28,7 @@
 		<td><%=pf.code%></td>
 		<td><%=pf.limit%></td>
 		<td><%=pf.price%></td>
+		<td><%=link_to "Edit Feature", edit_user_plan_feature_path(current_user.id,params[:id],pf.id)%></td>
 	</tr>
 	<%end%>
 		

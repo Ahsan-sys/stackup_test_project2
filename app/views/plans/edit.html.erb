@@ -1,1 +1,31 @@
 <h1>Plan Edit Page</h1>
+
+<%= form_for @plan, url: {action: "update"} do |plan| %>
+  <% if @plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+        <% @plan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="field form-group">
+    <%= plan.text_field :name,
+      class: "form-control", placeholder: "Plan Name"
+    %>
+  </div>
+  <br>
+  <div class="field form-group">
+    <%= plan.text_field :fee,
+      class: "form-control", placeholder: "Price"
+     %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= plan.submit %>
+  </div>
+<% end %>

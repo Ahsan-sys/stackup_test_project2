@@ -10,6 +10,7 @@
 	      <%if current_user.type == "Admin"%>
 	      	<th>Delete Plan</th>
 	      	<th>Show Plan Subscriptions</th>
+	      	<th>Edit Plan</th>
 	      <%else%>
 	      	<th>Subscribe Plan</th>
 	      <%end%>
@@ -30,6 +31,7 @@
 				<%if policy(plan).index?%>
 					<td><%=link_to "Delete",user_plan_path(current_user.id, plan.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
 					<td><%=link_to "Subscriptions", user_subscriptions_path(current_user.id, :plan_id=>plan.id)%></td>
+					<td><%=link_to "Edit", edit_user_plan_path(current_user.id, plan.id)%></td>
 				<%else%>
 					
 					<td><%=link_to "Subscribe",new_user_subscription_path(:plan_id=>plan.id)%></td>

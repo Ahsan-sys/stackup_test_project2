@@ -15,6 +15,19 @@ class UsagesController < ApplicationController
     end
   end
 
+  def edit
+    @usage=Usage.find(params[:id])
+  end
+
+  def update
+    @usage=Usage.find(params[:id])
+    if @usage.update(usage_params)
+      redirect_to user_plans_path(current_user.id)
+    else
+      render root_path
+    end
+  end
+
   private
 
   def usage_params
