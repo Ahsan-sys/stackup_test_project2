@@ -34,7 +34,7 @@
 					<td><%=link_to "Edit", edit_user_plan_path(current_user.id, plan.id)%></td>
 				<%else%>
 					
-					<td><%=link_to "Subscribe",new_user_subscription_path(:plan_id=>plan.id)%></td>
+					<td><%=link_to "Subscribe",new_user_subscription_path(current_user.id, :plan_id=>plan.id)%></td>
 					
 				<%end%>
 			</tr>

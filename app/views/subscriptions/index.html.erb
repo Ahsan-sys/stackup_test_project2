@@ -23,8 +23,8 @@
 	<%@subscriptions.each do |s|%>
 		<%if s.user_id==current_user.id%>
 			<tr>
-				<td><%=Plan.find(s.plan_id).name%></td>
-				<td><%=Plan.find(s.plan_id).fee%></td>
+				<td><%=s.plan.name%></td>
+				<td><%=s.plan.fee%></td>
 				<td><%=link_to "Transections", user_subscription_trasections_path(current_user.id,s.id)%></td>
 				<td><%=link_to "Remove Subscription", user_subscription_path(current_user.id,s), method: :delete, data: {confirm: "Are you sure?"}%></td>
 				<td><%=link_to "Pay Bill", new_user_subscription_trasection_path(current_user.id,s.id)%></td>
@@ -62,11 +62,12 @@
 	<%@subscriptions.each do |s|%>
 		<%if params[:plan_id] != nil &&  Integer(params[:plan_id])==s.plan_id%>
 		<tr>
-			<td><%=User.find(s.user_id).name%></td>
-			<td><%=Plan.find(s.plan_id).name%></td>
-			<td><%=Plan.find(s.plan_id).fee%></td>
+			<td><%=s.buyer.name%></td>
+			<td><%=s.plan.name%></td>
+			<td><%=s.plan.fee%></td>
 			<td><%=link_to "Create", new_user_subscription_usage_path(params[:user_id],s.id)%></td>
 			<td><%=link_to "Remove Subscription", user_subscription_path(current_user.id,s), method: :delete, data: {confirm: "Are you sure?"}%></td>
+
 		</tr>
 		<%end%>
 						

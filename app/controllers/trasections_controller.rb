@@ -31,7 +31,7 @@ class TrasectionsController < ApplicationController
       @b.each do |b|
         @trasection = Trasection.new(trasection_params)
 
-        @trasection.amount = (Integer(Feature.find(b.feature_id).price)*b.total_usage)
+        @trasection.amount = (b.feature.price*b.total_usage)
         @trasection.overuse = b.total_usage
         @trasection.trans_date = Date.today
         @trasection.feature_id = b.feature_id
@@ -49,6 +49,11 @@ class TrasectionsController < ApplicationController
     end
 
   end
+
+  def edit
+  end
+
+
 
   private
 

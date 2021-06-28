@@ -22,7 +22,7 @@
 
 
 
-  <%if Integer(Subscription.find(Integer(params[:subscription_id])).usages.sum(:total_usage))==0%>
+  <%if Subscription.find(Integer(params[:subscription_id])).usages.sum(:total_usage)==0%>
 
 										<!--------------------------------------->
 
@@ -48,7 +48,13 @@
 							<td> <%="nil" %></td>
 							<td> <%="nil" %></td>
 							<td> <%="nil" %></td>
-							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee)%></td>
+
+							<%if (Subscription.find(Integer(params[:subscription_id])).plan)!= nil%>
+								<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee)%></td>
+							<%else%>
+								<td>nil</td>
+							<%end%>
+
 							<td><%=Date.today%></td>
 						</tr>
 					</tbody>
@@ -62,7 +68,9 @@
 		<%@b=Subscription.find(Integer(params[:subscription_id])).usages.where("total_usage >0")%>
 
 		<%@b.each do |b|%>
-			  	<%@counter =  (Integer(Feature.find(b.feature_id).price)*b.total_usage)%>
+
+		
+			  	<%@counter =  (b.feature.price*b.total_usage)%>
 
 			  <!------------------Table of Over Use > 0----------------------->
 			  	<table class="table table-striped table-bordered table-hover">
@@ -89,10 +97,10 @@
 							<td><%=b.subscription_id%></td>
 							<td> <%=b.feature_id %></td>
 							<td> <%=b.total_usage %></td>
-							<td><%=Feature.find(b.feature_id).price%></td>
+							<td><%=b.feature.price%></td>
 							<td> <%=@counter%></td>
-							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee+@counter)%></td>
-							<td><%=(Subscription.find(Integer(params[:subscription_id])).plan.fee+@counter)+ @counter%></td>
+							<td><%=b.feature.plan.fee%></td>
+							<td><%=b.feature.plan.fee+ @counter%></td>
 							<td><%=Date.today%></td>
 						</tr>
 					</tbody>

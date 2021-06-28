@@ -3,7 +3,12 @@
 one:
   total_usage: 1
   usage_date: 2021-06-18
+  subscription_id:  1
+  feature_id: 1
 
 two:
+  id: 2
   total_usage: 1
   usage_date: 2021-06-18
+  subscription_id:  2
+  feature_id: 2

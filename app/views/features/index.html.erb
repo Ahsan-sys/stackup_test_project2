@@ -18,11 +18,11 @@
     
 		
 	<%@features.each do |fea| %>
-	<%if Integer(fea.plan_id) == Integer(params[:plan_id])%>
+	<%if fea.plan_id != nil && fea.plan_id == Integer(params[:plan_id])%>
 		<tr>
 			<td><%=fea.name%></td>
 			<td><%=fea.id%></td>
-			<td><%=Plan.find(fea.plan_id).name%></td>
+			<td><%=fea.plan.name%></td>
 			<td><%=link_to "Show Feature", user_plan_feature_path(params[:user_id],fea.plan_id,fea.id)%></td>
 	</tr>
 	<%end%>

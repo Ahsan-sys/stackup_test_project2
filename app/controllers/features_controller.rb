@@ -13,7 +13,7 @@ class FeaturesController < ApplicationController
     @feature.plan_id=@plan
     # byebug
     if @feature.save
-      redirect_to user_plans_path(current_user)
+      redirect_to user_plans_path(current_user.id)
 
     else
       redirect_to users_path
@@ -34,12 +34,13 @@ class FeaturesController < ApplicationController
     end
   end
 
-  def destroy
+  # def destroy
 
-    @feature = Feature.find(params[:id])
-    @feature.destroy
+  #   @feature = Feature.find(params[:id])
+  #   @feature.destroy
+  #   redirect_to user_plans_path(current_user.id)
     
-  end
+  # end
 
   private
 

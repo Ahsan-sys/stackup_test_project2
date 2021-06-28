@@ -2,6 +2,7 @@
 
 
 <%= form_for @usage, url: {action: "create"} do |usage| %>
+
   <% if @usage.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@usage.errors.count, "error") %> prohibited this usage from being saved:</h2>
@@ -20,7 +21,13 @@
     %>
     <br>
   </div>
-  <%=link_to "All Features", user_plan_features_path(params[:user_id],Subscription.find(Integer(params[:subscription_id])).plan.id)%>
+
+  <%if Subscription.find(Integer(params[:subscription_id])).plan != nil%>
+    <%=link_to "All Features", user_plan_features_path(params[:user_id],Subscription.find(Integer(params[:subscription_id])).plan.id)%>
+  <%else%>
+    All Features
+  <%end%>
+  
   <br>
   <%=usage.hidden_field :subscription_id, value: params[:subscription_id]%>
   <br>

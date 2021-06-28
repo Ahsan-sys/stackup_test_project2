@@ -1,9 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  fee: 1
-  name: MyString
+  fee: 31
+  name: MyString1
 
 two:
-  fee: 1
-  name: MyString
+  id: 2
+  fee: 12
+  name: MyString2

@@ -8,8 +8,9 @@
       <th>Plan Name</th>
       <th>Plan Fee</th>
       <th>Feature Over Used</th>
-      <th>Feature Extra Charges</th>
       <th>Total Bill</th>
+      <th>Feature Extra Charges</th>
+      
 
 
       <!-- <th colspan="3"></th> -->
@@ -23,25 +24,30 @@
 	
 <%@trasections.each do |tr|%>
 	<%if tr.subscription_id!=nil%>
+
 		<%if Integer(params[:subscription_id])==Integer(tr.subscription_id) %>
 			<tr>
-				<td><%=Subscription.find(Integer(tr.subscription_id)).buyer.name%></td>
-			
-				<td><%=Subscription.find(Integer(tr.subscription_id)).plan.name%></td>
+				<td><%=tr.subscription.buyer.name%></td>
 				
-				<td><%=Subscription.find(Integer(tr.subscription_id)).plan.fee%></td>
+				
+				<td><%=tr.subscription.plan.name%></td>
+				
+				<td><%=tr.subscription.plan.fee%></td>
 				
 				<%if tr.feature_id !=nil%>
-					<td><%=Feature.find(Integer(tr.feature_id)).name%></td>
+					<td><%=tr.feature.name%></td>
+					<td> <%= tr.amount + tr.subscription.plan.fee%></td>
+					<td><%=tr.feature.price %></td>
 				<%else%>
 					<td><%='nil'%></td>	
+					<td> <%=tr.amount%></td>
+					<td><%='nil'%></td>	
+					
 				<%end%>
-				<td> <%=tr.amount%></td>
-				<%if tr.feature_id !=nil%>
-					<td> <%= tr.amount + Subscription.find(Integer(tr.subscription_id)).plan.fee %></td>
-				<%else%>
-					<td><%=Subscription.find(Integer(tr.subscription_id)).plan.fee%></td>
-				<%end%>
+				
+				
+
+				
 				
 			</tr>
 		<%end%>

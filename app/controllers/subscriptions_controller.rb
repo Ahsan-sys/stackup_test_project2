@@ -14,12 +14,15 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new(sub_params)
 
     if @subscription.save
-      redirect_to user_path(params[:user_id])
+      redirect_to new_user_subscription_trasection_path(params[:user_id], @subscription.id)
     else
       redirect_to users_path
       
     end
     
+  end
+
+  def edit
   end
 
   def destroy

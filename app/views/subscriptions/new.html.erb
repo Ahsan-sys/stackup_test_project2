@@ -18,9 +18,14 @@
     
 		
 	<%=form_for @subscription, url: {action: "create"} do |subs|%>
-		<td><%=Plan.find(params[:plan_id]).name%></td>
-		<td><%=Plan.find(params[:plan_id]).fee%></td>
-
+		<%if params[:plan_id] != nil%>
+			<td><%=Plan.find(params[:plan_id]).name%></td>
+			<td><%=Plan.find(params[:plan_id]).fee%></td>
+		<%else%>
+			<td>nil</td>
+			<td>nil</td>
+		<%end%>
+		
 		<%=subs.hidden_field :user_id, value: params[:user_id]%>
 		<%=subs.hidden_field :plan_id, value: params[:plan_id]%>
 
